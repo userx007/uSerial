@@ -28,11 +28,10 @@ class ICommDriver
 
         virtual bool is_open() const = 0;
 
-        virtual Status timeout_read(uint32_t u32ReadTimeout, std::span<uint8_t> buffer, size_t* pBytesRead) const = 0;
-        virtual Status timeout_readline(uint32_t u32ReadTimeout, std::span<uint8_t> buffer) const = 0;
-        virtual Status timeout_write(uint32_t u32WriteTimeouts, std::span<const uint8_t> buffer) const = 0;
-        virtual Status timeout_wait_for_token(uint32_t u32ReadTimeout, std::span<const uint8_t> token) const = 0;
-        virtual Status timeout_wait_for_token_buffer(uint32_t u32ReadTimeout, std::span<const uint8_t> token, size_t szTokenLength) const = 0;
+        virtual Status timeout_read (uint32_t u32ReadTimeout, std::span<uint8_t> buffer, size_t* pBytesRead) const = 0;
+        virtual Status timeout_readline (uint32_t u32ReadTimeout, std::span<uint8_t> buffer) const = 0;
+        virtual Status timeout_write (uint32_t u32WriteTimeouts, std::span<const uint8_t> buffer) const = 0;
+        virtual Status timeout_wait_for_token (uint32_t u32ReadTimeout, std::span<const uint8_t> token, bool useBuffer) const = 0;
 
         static std::string to_string(Status code)
         {

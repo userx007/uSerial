@@ -36,20 +36,20 @@ public:
     Status close();
     bool is_open() const;
 
-    Status timeout_read(uint32_t u32ReadTimeout, std::span<uint8_t> buffer, size_t* pBytesRead) const;
-    Status timeout_readline(uint32_t u32ReadTimeout, std::span<uint8_t> buffer) const;
-    Status timeout_write(uint32_t u32WriteTimeouts, std::span<const uint8_t> buffer) const;
-    Status timeout_wait_for_token(uint32_t u32ReadTimeout, std::span<const uint8_t> token) const;
-    Status timeout_wait_for_token_buffer(uint32_t u32ReadTimeout, std::span<const uint8_t> token, size_t szTokenLength) const;
+    Status timeout_read (uint32_t u32ReadTimeout, std::span<uint8_t> buffer, size_t* pBytesRead) const;
+    Status timeout_readline (uint32_t u32ReadTimeout, std::span<uint8_t> buffer) const;
+    Status timeout_write (uint32_t u32WriteTimeouts, std::span<const uint8_t> buffer) const;
+    Status timeout_wait_for_token (uint32_t u32ReadTimeout, std::span<const uint8_t> token, bool useBuffer) const;
 
 private:
 
     int m_iHandle; /**< Internal handle to the UART device. */
 
-    Status purge(bool bInput, bool bOutput) const;
-    Status setup(uint32_t u32Speed) const;
-    Status read_until(uint32_t u32TimeoutMs, std::span<uint8_t> buffer, uint8_t cDelimiter) const;
-    void   build_kmp_table(std::span<const uint8_t> pattern, size_t szLength, std::vector<int>& viLps) const;
+    Status purge (bool bInput, bool bOutput) const;
+    Status setup (uint32_t u32Speed) const;
+    Status read_until (uint32_t u32TimeoutMs, std::span<uint8_t> buffer, uint8_t cDelimiter) const;
+    Status kmp_stream_match (std::span<const uint8_t> token, const std::vector<int>& viLps, uint32_t u32Timeout, bool bReturnOnTimeout, bool useBuffer) const;
+    void   build_kmp_table (std::span<const uint8_t> pattern, size_t szLength, std::vector<int>& viLps) const;
 
 #ifndef _WIN32
     speed_t getBaud(uint32_t u32Speed) const;
