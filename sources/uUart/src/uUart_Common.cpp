@@ -16,12 +16,6 @@ bool UART::is_open()  const
 
 
 
-UART::Status UART::timeout_readline (uint32_t u32ReadTimeout, std::span<uint8_t> buffer) const
-{
-    return read_until(u32ReadTimeout, buffer, '\n');
-}
-
-
 UART::Status UART::timeout_wait_for_token (uint32_t u32ReadTimeout, std::span<const uint8_t> token, bool useBuffer) const
 {
     size_t szTokenLength = token.size();
@@ -98,7 +92,7 @@ UART::Status UART::kmp_stream_match (std::span<const uint8_t> token, const std::
 
 
 
-UART::Status UART::read_until(uint32_t u32TimeoutMs, std::span<uint8_t> buffer, uint8_t cDelimiter) const
+UART::Status UART::timeout_read_until (uint32_t u32TimeoutMs, std::span<uint8_t> buffer, uint8_t cDelimiter) const
 {
     if (buffer.size() < 2) {
         LOG_PRINT(LOG_ERROR, LOG_HDR; LOG_STRING("Buffer too small for delimiter + null terminator"));
