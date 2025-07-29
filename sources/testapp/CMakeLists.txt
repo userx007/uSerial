@@ -1,18 +1,26 @@
 cmake_minimum_required(VERSION 3.10)
-project(SerialTools)
+project(UartTools)
 
-add_executable(serial_responder  src/serial_responder.cpp)
-add_executable(serial_sender     src/serial_sender.cpp)
+add_executable(uart_responder  src/test_uart_responder.cpp  src/test_uart_common.cpp)
+add_executable(uart_sender     src/test_uart_sender.cpp     src/test_uart_common.cpp)
 
-# Link libraries to each executable
-target_link_libraries(serial_responder
+
+target_link_libraries(uart_responder
     PRIVATE
-    uLogger
-    uSerial
+        uUart
 )
 
-target_link_libraries(serial_sender
+target_include_directories(uart_responder
+    PUBLIC
+        ${PROJECT_SOURCE_DIR}/inc
+)
+
+target_link_libraries(uart_sender
     PRIVATE
-    uLogger
-    uSerial
+        uUart
+)
+
+target_include_directories(uart_sender
+    PUBLIC
+        ${PROJECT_SOURCE_DIR}/inc
 )

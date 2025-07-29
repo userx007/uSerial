@@ -32,7 +32,8 @@
 *.app
 
 # Build folders
-bin/windows/
+
+bin
 build_linux_MinSizeRel/
 build_windows_MinSizeRel/
 .vs/

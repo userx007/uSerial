@@ -18,8 +18,8 @@ endif()
 
 add_subdirectory(sources)
 
-install ( TARGETS serial_sender    DESTINATION ${INSTALL_APP_DIR} )
-install ( TARGETS serial_responder DESTINATION ${INSTALL_APP_DIR} )
+install ( TARGETS uart_sender    DESTINATION ${INSTALL_APP_DIR} )
+install ( TARGETS uart_responder DESTINATION ${INSTALL_APP_DIR} )
 
 
 
