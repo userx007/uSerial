@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
         memset(buffer, 0, sizeof(buffer));
 
         std::span<uint8_t> span(reinterpret_cast<uint8_t*>(buffer), sizeof(buffer));
-        if (UART::Status::SUCCESS == uart.timeout_read(UART::UART_READ_DEFAULT_TIMEOUT, span, &szSizeRead))
+        if (UART::Status::SUCCESS == uart.timeout_read(UART::UART_READ_DEFAULT_TIMEOUT, span, szSizeRead))
         {
             std::cout << argv[0] << ": received:" << std::endl;
             hexutils::HexDump2(reinterpret_cast<const uint8_t*>(buffer), szSizeRead);

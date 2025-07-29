@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
             size_t szSizeRead = 0;
             std::span<uint8_t> readSpan(buffer.data(), buffer.size());
 
-            if (UART::Status::SUCCESS == uart.timeout_read(UART::UART_READ_DEFAULT_TIMEOUT, readSpan, &szSizeRead))
+            if (UART::Status::SUCCESS == uart.timeout_read(UART::UART_READ_DEFAULT_TIMEOUT, readSpan, szSizeRead))
             {
                 std::cout << argv[0] << ": received ok" << std::endl;
                 hexutils::HexDump2(buffer.data(), szSizeRead);
