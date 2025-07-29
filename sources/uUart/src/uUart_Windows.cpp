@@ -96,8 +96,8 @@ UART::Status UART::purge(bool bInput, bool bOutput)  const
 
 UART::Status UART::timeout_read(uint32_t u32ReadTimeout, std::span<uint8_t> buffer, size_t *pBytesRead) const
 {
-    if (!buffer.data()) {
-        LOG_PRINT(LOG_ERROR, LOG_HDR; LOG_STRING("Invalid parameter (buffer.data()=NULL)"));
+    if (buffer.empty() || !pBytesRead) {
+        LOG_PRINT(LOG_ERROR, LOG_HDR; LOG_STRING("timeout_read: invalid parameter"));
         return Status::INVALID_PARAM;
     }
 
@@ -147,8 +147,8 @@ UART::Status UART::timeout_read(uint32_t u32ReadTimeout, std::span<uint8_t> buff
 
 UART::Status UART::timeout_write(uint32_t u32WriteTimeout, std::span<const uint8_t> buffer) const
 {
-    if (!buffer.data()) {
-        LOG_PRINT(LOG_ERROR, LOG_HDR; LOG_STRING("Invalid parameter (buffer.data()=NULL)"));
+    if (buffer.empty()) {
+        LOG_PRINT(LOG_ERROR, LOG_HDR; LOG_STRING("Invalid parameter: buffer.empty()"));
         return Status::INVALID_PARAM;
     }
 
